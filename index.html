@@ -1,34 +1,703 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Luna Berthélémé – Portfolio</title>
-<style>
-  body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #222; }
-  h1 { margin-bottom: 0; }
-  h2 { margin-top: 40px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-  a { color: #1f5c46; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio professionnel d'une étudiante en BTS SIO : compétences, projets informatiques et parcours.">
+    <title>Portfolio | Étudiante BTS SIO</title>
+
+    <style>
+        :root {
+            --bg: #0b1120;
+            --surface: #111a2e;
+            --primary: #7c9cff;
+            --accent: #42e8c2;
+            --text: #f1f5f9;
+            --muted: #a2aec4;
+            --border: #27344b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 17, 32, 0.94);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+        }
+
+        nav {
+            min-height: 76px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 0.92rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            min-height: 82vh;
+            display: flex;
+            align-items: center;
+            padding: 90px 0;
+            background:
+                radial-gradient(ellipse at 85% 30%, #243c6b55, transparent 40%),
+                radial-gradient(ellipse at 10% 80%, #0d766055, transparent 35%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 14px;
+            border: 1px solid #42e8c255;
+            border-radius: 30px;
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1.12;
+            letter-spacing: -2px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            color: #0b1120;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+        }
+
+        section {
+            padding: 85px 0;
+            scroll-margin-top: 75px;
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            margin: 8px 0 18px;
+        }
+
+        .section-intro {
+            color: var(--muted);
+            max-width: 680px;
+            margin-bottom: 35px;
+        }
+
+        .about-grid,
+        .skills-grid,
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        .icon {
+            font-size: 1.7rem;
+            margin-bottom: 14px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .tag {
+            padding: 5px 10px;
+            border-radius: 6px;
+            background: #7c9cff16;
+            border: 1px solid #7c9cff35;
+            color: #b6c8ff;
+            font-size: 0.8rem;
+        }
+
+        .skills-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .project-number {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .timeline {
+            border-left: 2px solid var(--border);
+            margin-left: 8px;
+            padding-left: 28px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -36px;
+            top: 9px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .timeline-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .timeline-item p,
+        .timeline-item span {
+            color: var(--muted);
+        }
+
+        .contact-box {
+            text-align: center;
+            padding: 50px 25px;
+            background: linear-gradient(135deg, #18294a, #111a2e);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .contact-box p {
+            color: var(--muted);
+            margin: 0 auto 25px;
+            max-width: 550px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 25px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 760px) {
+            nav {
+                padding: 16px 0;
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                gap: 12px 18px;
+            }
+
+            .about-grid,
+            .projects-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 90px 0;
+            }
+
+            h1 {
+                letter-spacing: -1px;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Luna Berthélémé</h1>
-<p>Bienvenue sur mon portfolio</p>
+<header>
+    <nav class="container" aria-label="Navigation principale">
+        <a class="logo" href="#accueil">Mon<span>Portfolio.</span></a>
 
-<h2>À propos</h2>
-<p>Je suis étudiante en première année de SIO .</p>
+        <ul class="nav-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#apropos">À propos</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#projets">Projets</a></li>
+            <li><a href="#parcours">Parcours</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-<h2>Projets</h2>
-<ul>
-  <li><a href="#">Projet 1</a> : courte description</li>
-  <li><a href="#">Projet 2</a> : courte description</li>
-  <li><a href="#">Projet 3</a> : courte description</li>
-</ul>
+<main>
+    <!-- ACCUEIL -->
+    <section class="hero" id="accueil">
+        <div class="container hero-content">
+            <span class="status">● Étudiante en BTS SIO</span>
 
-<h2>Contact</h2>
-<p><a href="mailto:berthelemeluna@gmail.com">berthelemeluna@gmail.com</a></p>
-<p><a href="https://github.com/tonpseudo">GitHub</a></p>
+            <h1>
+                Bonjour, je suis<br>
+                <span>Prénom Nom.</span>
+            </h1>
+
+            <p>
+                Étudiante en Services Informatiques aux Organisations,
+                passionnée par le numérique, le développement et les
+                nouvelles technologies. Je construis mes compétences
+                à travers des projets concrets et des expériences
+                professionnelles.
+            </p>
+
+            <div class="buttons">
+                <a href="#projets" class="btn btn-primary">
+                    Découvrir mes projets ↗
+                </a>
+
+                <a href="#contact" class="btn btn-secondary">
+                    Me contacter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section id="apropos">
+        <div class="container">
+            <span class="section-label">Qui suis-je ?</span>
+            <h2>À propos de moi</h2>
+
+            <p class="section-intro">
+                Une présentation de mon profil, de ma formation
+                et de mes objectifs professionnels.
+            </p>
+
+            <div class="about-grid">
+                <article class="card">
+                    <div class="icon">🎓</div>
+                    <h3>Ma formation</h3>
+                    <p>
+                        Je prépare un BTS Services Informatiques aux
+                        Organisations (BTS SIO), une formation qui me
+                        permet d'acquérir des compétences en informatique,
+                        en gestion de projets et en administration des
+                        systèmes ou en développement.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🎯</div>
+                    <h3>Mon objectif</h3>
+                    <p>
+                        Développer mes compétences techniques, réaliser
+                        des projets utiles et acquérir de l'expérience
+                        professionnelle afin de poursuivre mon parcours
+                        dans le secteur informatique.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPÉTENCES -->
+    <section id="competences">
+        <div class="container">
+            <span class="section-label">Mon savoir-faire</span>
+            <h2>Compétences informatiques</h2>
+
+            <p class="section-intro">
+                Les technologies et outils étudiés durant ma formation.
+                Cette liste est à adapter à tes connaissances réelles.
+            </p>
+
+            <div class="skills-grid">
+                <article class="card">
+                    <div class="icon">💻</div>
+                    <h3>Développement web</h3>
+                    <p>Création de pages web et interfaces utilisateur.</p>
+                    <div class="tags">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🗄️</div>
+                    <h3>Bases de données</h3>
+                    <p>Conception de bases de données et manipulation des données.</p>
+                    <div class="tags">
+                        <span class="tag">SQL</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Modélisation</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="icon">⚙️</div>
+                    <h3>Systèmes et réseaux</h3>
+                    <p>Découverte de l'administration informatique et des réseaux.</p>
+                    <div class="tags">
+                        <span class="tag">Windows</span>
+                        <span class="tag">Linux</span>
+                        <span class="tag">Réseaux</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🛠️</div>
+                    <h3>Outils professionnels</h3>
+                    <p>Organisation du travail et suivi de projets informatiques.</p>
+                    <div class="tags">
+                        <span class="tag">Git</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">VS Code</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🔐</div>
+                    <h3>Cybersécurité</h3>
+                    <p>Notions de sécurité, bonnes pratiques et protection des données.</p>
+                    <div class="tags">
+                        <span class="tag">Sécurité</span>
+                        <span class="tag">RGPD</span>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🤝</div>
+                    <h3>Savoir-être</h3>
+                    <p>Des qualités importantes pour travailler en équipe.</p>
+                    <div class="tags">
+                        <span class="tag">Autonomie</span>
+                        <span class="tag">Rigueur</span>
+                        <span class="tag">Curiosité</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projets">
+        <div class="container">
+            <span class="section-label">Mes réalisations</span>
+            <h2>Projets informatiques</h2>
+
+            <p class="section-intro">
+                Quelques exemples de projets scolaires ou personnels.
+                Remplace-les par tes véritables réalisations.
+            </p>
+
+            <div class="projects-grid">
+                <article class="card">
+                    <div class="project-number">PROJET 01</div>
+                    <h3>Portfolio personnel</h3>
+                    <p>
+                        Conception d'un site web responsive pour présenter
+                        mon parcours, mes compétences et mes projets.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">GitHub Pages</span>
+                    </div>
+                    <a class="project-link"
+                       href="https://github.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Voir sur GitHub ↗
+                    </a>
+                </article>
+
+                <article class="card">
+                    <div class="project-number">PROJET 02</div>
+                    <h3>Gestion de base de données</h3>
+                    <p>
+                        Exemple de projet portant sur la conception
+                        d'une base de données, les relations entre
+                        les tables et les requêtes SQL.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">SQL</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Modélisation</span>
+                    </div>
+                    <a class="project-link"
+                       href="https://github.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Voir sur GitHub ↗
+                    </a>
+                </article>
+
+                <article class="card">
+                    <div class="project-number">PROJET 03</div>
+                    <h3>Application web</h3>
+                    <p>
+                        Exemple de réalisation d'une interface web
+                        interactive répondant à un besoin précis,
+                        dans le cadre d'un projet de formation.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+                    <a class="project-link"
+                       href="https://github.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Voir sur GitHub ↗
+                    </a>
+                </article>
+
+                <article class="card">
+                    <div class="project-number">PROJET 04</div>
+                    <h3>Documentation technique</h3>
+                    <p>
+                        Exemple de documentation d'une procédure
+                        d'installation, de configuration ou de résolution
+                        d'un incident informatique.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Support IT</span>
+                        <span class="tag">Documentation</span>
+                    </div>
+                    <a class="project-link"
+                       href="https://github.com/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Voir sur GitHub ↗
+                    </a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARCOURS -->
+    <section id="parcours">
+        <div class="container">
+            <span class="section-label">Mon évolution</span>
+            <h2>Formation et expériences</h2>
+
+            <p class="section-intro">
+                Mon parcours scolaire et mes expériences dans le domaine
+                informatique.
+            </p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span>2025 – 2027 · À personnaliser</span>
+                    <h3>BTS Services Informatiques aux Organisations</h3>
+                    <p>
+                        Nom de l'établissement · Ville
+                    </p>
+                    <p>
+                        Formation aux technologies informatiques,
+                        aux projets professionnels et aux compétences
+                        du référentiel BTS SIO.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span>Année à préciser</span>
+                    <h3>Stage en entreprise</h3>
+                    <p>
+                        Nom de l'entreprise · Ville
+                    </p>
+                    <p>
+                        Décris ici tes missions : assistance aux utilisateurs,
+                        développement, maintenance, documentation ou réseau,
+                        selon les tâches réellement effectuées.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span>Année à préciser</span>
+                    <h3>Formation précédente</h3>
+                    <p>
+                        Diplôme obtenu · Établissement
+                    </p>
+                    <p>
+                        Ajoute ici ton baccalauréat ou ton parcours antérieur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-box">
+                <span class="section-label">Restons en contact</span>
+                <h2>Un projet ou une opportunité ?</h2>
+
+                <p>
+                    Je suis intéressée par les opportunités qui me
+                    permettront de développer mes compétences et de
+                    progresser dans le domaine informatique.
+                </p>
+
+                <!-- Remplace l'adresse ci-dessous par ton adresse professionnelle -->
+                <div class="buttons" style="justify-content: center;">
+                    <a class="btn btn-primary"
+                       href="mailto:ton.email@example.com">
+                        M'envoyer un e-mail ↗
+                    </a>
+
+                    <!-- Remplace TON-PSEUDO par ton identifiant GitHub -->
+                    <a class="btn btn-secondary"
+                       href="https://github.com/TON-PSEUDO"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Mon GitHub ↗
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>
+            © <span id="year"></span> Prénom Nom · Portfolio BTS SIO
+        </p>
+        <p>Réalisé avec HTML et CSS.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+</script>
 
 </body>
 </html>
+
